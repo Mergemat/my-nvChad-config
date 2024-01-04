@@ -12,6 +12,8 @@ local servers = {
   "gopls",
   "gradle_ls",
   "solidity_ls_nomicfoundation",
+  "tailwindcss",
+  "pyright",
 }
 
 local function organize_imports()
@@ -40,14 +42,27 @@ for _, lsp in ipairs(servers) do
         organize_imports,
         description = "Organize Imports",
       },
-      QuickFix = {
-        quick_fix,
-        description = "quick fix",
-      },
+      -- QuickFix = {
+      --   quick_fix,
+      --   description = "quick fix",
+      -- },
     },
   }
-  lspconfig.prismals.setup {}
 end
+lspconfig.prismals.setup {}
+lspconfig.tailwindcss.setup {
+  settings = {
+
+    tailwindCSS = {
+      experimental = {
+        classRegex = {
+          { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+          { "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+        },
+      },
+    },
+  },
+}
 
 --
 -- lspconfig.pyright.setup { blabla}

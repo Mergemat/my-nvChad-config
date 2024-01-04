@@ -15,12 +15,12 @@ M.ui = {
     load_on_startup = true,
   },
   statusline = {
-    theme = "vscode_colored",
+    theme = "minimal",
   },
   cmp = {
     style = "default",
-    icons = true
-  }
+    icons = true,
+  },
 }
 
 M.plugins = "custom.plugins"

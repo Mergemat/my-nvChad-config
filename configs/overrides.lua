@@ -15,6 +15,7 @@ M.treesitter = {
     "prisma",
     "go",
     "solidity",
+    "python",
   },
   indent = {
     enable = true,
@@ -32,12 +33,13 @@ M.mason = {
     -- lua stuff
     "lua-language-server",
     "stylua",
-
+    "pyright",
     -- web dev stuff
     "css-lsp",
     "html-lsp",
     "typescript-language-server",
     "eslint_d",
+    "oxlint",
     "deno",
     "prettier",
     "biome",
@@ -57,9 +59,21 @@ M.nvimtree = {
   git = {
     enable = true,
   },
+  view = {
+    adaptive_size = true,
+    side = "left",
+    width = 25,
+  },
+
+  actions = {
+    open_file = {
+      resize_window = true,
+      quit_on_open = true,
+    },
+  },
 
   renderer = {
-    highlight_opened_files = "all",
+    -- highlight_opened_files = "all",
     highlight_git = true,
     icons = {
       show = {
@@ -67,12 +81,20 @@ M.nvimtree = {
       },
       glyphs = {
         git = {
-          unstaged = "•",
+          unstaged = "",
           deleted = "",
+          untracked = "",
         },
       },
     },
   },
 }
-
+M.telescope = {
+  extensions = {
+    fzy_native = {
+      override_generic_sorter = false,
+      override_file_sorter = true,
+    },
+  },
+}
 return M

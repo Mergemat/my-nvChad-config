@@ -28,14 +28,20 @@ local plugins = {
     opts = overrides.mason,
   },
 
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   dependencies = {
+  --     "windwp/nvim-ts-autotag",
+  --   },
+  --   opts = overrides.treesitter,
+  -- },
   {
-    "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "windwp/nvim-ts-autotag",
-    },
-    opts = overrides.treesitter,
+    "windwp/nvim-ts-autotag",
+    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
   },
-
   {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
@@ -66,7 +72,7 @@ local plugins = {
 
   {
     "mfussenegger/nvim-lint",
-    event = "VeryLazy",
+    Event = "VeryLazy",
     config = function()
       require "custom.configs.lint"
     end,
@@ -104,7 +110,12 @@ local plugins = {
   {
     "Exafunction/codeium.vim",
     lazy = false,
-    enabled = false,
+    --[[ config = function()
+      vim.g.codeium_disable_bindings = 1
+      vim.keymap.set("i", "<C-d>", function()
+        return vim.fn["codeium#Accept"]()
+      end, { expr = true, silent = true })
+    end, ]]
   },
   {
     "folke/trouble.nvim",
@@ -118,13 +129,6 @@ local plugins = {
 
   { "folke/neodev.nvim", opts = {} },
   {
-    "windwp/nvim-ts-autotag",
-    lazy = false,
-    config = function()
-      require("nvim-ts-autotag").setup {}
-    end,
-  },
-  {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
@@ -133,6 +137,43 @@ local plugins = {
         -- Configuration here, or leave empty to use defaults
       }
     end,
+  },
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      local harpoon = require "harpoon"
+      harpoon:setup {}
+
+    end,
+  },
+  {
+    "wakatime/vim-wakatime",
+    lazy = false,
+  },
+  {
+    "mbbill/undotree",
+    lazy = false,
+  },
+  {
+    "toppair/peek.nvim",
+    build = "deno task --quiet build:fast",
+    keys = {
+      {
+        "<leader>op",
+        function()
+          local peek = require "peek"
+          if peek.is_open() then
+            peek.close()
+          else
+            peek.open()
+          end
+        end,
+        desc = "Peek (Markdown Preview)",
+      },
+    },
+    opts = { theme = "dark", app = "webview" },
   },
 }
 

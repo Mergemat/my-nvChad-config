@@ -1,5 +1,6 @@
 local null_ls = require "null-ls"
 
+require("Comment.ft").set("typescriptreact", { "//%s", "{/*%s*/}" })
 local b = null_ls.builtins
 
 local sources = {
@@ -14,6 +15,11 @@ local sources = {
   b.formatting.stylua,
   -- cpp
   b.formatting.clang_format,
+
+  b.formatting.black,
+  b.formatting.djlint,
+  b.diagnostics.curlylint,
+  b.diagnostics.ruff,
 }
 
 null_ls.setup {
