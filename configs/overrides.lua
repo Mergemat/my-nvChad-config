@@ -88,12 +88,17 @@ M.nvimtree = {
       },
     },
   },
+  filters = {
+    dotfiles = true,
+  },
 }
 M.telescope = {
-  extensions = {
-    fzy_native = {
-      override_generic_sorter = false,
-      override_file_sorter = true,
+  defaults = {
+    layout_config = {
+      horizontal = {
+        preview_width = 0.45,
+        results_width = 0.9,
+      },
     },
   },
 }

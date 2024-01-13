@@ -28,6 +28,12 @@ local plugins = {
     opts = overrides.mason,
   },
 
+  {
+
+    "nvim-telescope/telescope.nvim",
+    opts = overrides.telescope,
+  },
+
   -- {
   --   "nvim-treesitter/nvim-treesitter",
   --   dependencies = {
@@ -87,9 +93,13 @@ local plugins = {
   },
 
   { "tpope/vim-fugitive" },
-  { "rbong/vim-flog", dependencies = {
-    "tpope/vim-fugitive",
-  }, lazy = false },
+  {
+    "rbong/vim-flog",
+    dependencies = {
+      "tpope/vim-fugitive",
+    },
+    lazy = false,
+  },
   { "sindrets/diffview.nvim", lazy = false },
   {
     "ggandor/leap.nvim",
@@ -110,12 +120,6 @@ local plugins = {
   {
     "Exafunction/codeium.vim",
     lazy = false,
-    --[[ config = function()
-      vim.g.codeium_disable_bindings = 1
-      vim.keymap.set("i", "<C-d>", function()
-        return vim.fn["codeium#Accept"]()
-      end, { expr = true, silent = true })
-    end, ]]
   },
   {
     "folke/trouble.nvim",
@@ -145,7 +149,6 @@ local plugins = {
     config = function()
       local harpoon = require "harpoon"
       harpoon:setup {}
-
     end,
   },
   {
@@ -155,25 +158,6 @@ local plugins = {
   {
     "mbbill/undotree",
     lazy = false,
-  },
-  {
-    "toppair/peek.nvim",
-    build = "deno task --quiet build:fast",
-    keys = {
-      {
-        "<leader>op",
-        function()
-          local peek = require "peek"
-          if peek.is_open() then
-            peek.close()
-          else
-            peek.open()
-          end
-        end,
-        desc = "Peek (Markdown Preview)",
-      },
-    },
-    opts = { theme = "dark", app = "webview" },
   },
 }
 
